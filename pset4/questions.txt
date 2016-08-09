@@ -1,0 +1,19 @@
+0.  BMP: 4 billion, GIF: 256; PNG: 16 million; JPEG 16 million
+1.  GIF
+2.  lossy compression permently deletes some information, while with lossless compresion this information can be restored after uncompressing the file
+3.  JPEG
+4.  The clusters in which files data is stored are marked as free, thus making them reusable, and the files data isn't actually deleted until some other data overrides it.
+5.  Someone like me can override the memory allocated for the file which is to be deleted.
+6.  stdint.h is a header file, which allows programmers to specify exact-width integer types.
+7.  Using them lets you create integer types, which have a pre-defined size, thus making them portable on all systems, because essentially, they all go down to 1s and 0s. This is particulary important for image file formats, since they need to be available on many different platforms.
+8.BYTE: 1, DWORD: 5, LONG: 5, WORD: 4. 
+9.  Both must be 0.
+10.  biSize is the number of bytes required by the structure, while bfSize is the size of the BM file.
+11. If biHeight is negative the bitmap is top-down and its starting point is upper-left coner.
+12. biBitCount
+13. It would happen if making or overwriting output file would be impossible e.g. denied permission or memory error
+14. So that it reads one pixel at a time.
+15. 3
+16. fseek sets pointer to where you want the program to read the file from. In copy.c is starts after the padding bit if there is such.
+17. it tells fseek to change the location of the pointer from its current location.
+18. A smiling man in a suit.

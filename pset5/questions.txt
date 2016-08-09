@@ -1,0 +1,76 @@
+0.  What is pneumonoultramicroscopicsilicovolcanoconiosis?
+
+It is the longest word in the English language published in a dictionary.
+
+1.  According to its man page, what does getrusage do?
+
+It returns recource usage resources. In the program speller.c being 
+maesured is RUSAGE_SELF, which, simply put is the process that calls getrusage.
+In the function calculate ru_utime and ru_stime are used as measures for
+check, load, unload, size function effiency in terms of CPU time used.
+
+2.Per that same man page, how many members are in a variable of type struct rusage?
+
+16
+
+3.  Why do you think we pass before and after by reference (instead of by value) 
+to calculate, even though we’re not changing their contents?
+
+In the same man page it says: "The resource usages are returned in  the  structure
+pointed  to  by usage", which basicly says that getrusage() puts reasource
+usage statistics into a structure, which it finds with the given address(pointer)
+(in speller.c that would be &before and &after).
+
+4.  Explain as precisely as possible, in a paragraph or more,
+how main goes about reading words from a file. In other words,
+convince us that you indeed understand how that function’s for loop works.
+
+First the loop initializes variable of type int called c and sets it
+to character in file at the current files reading position. With each
+iteration the for loop advances this position with c = fgetc(fp), which in spirit
+is similar to i++ - instead of advancing index, it advances reading position in
+file and store the next character in c. This goes on until EOF is found.
+Next, in the loop the program checks if the chracter that it's currently storing in c
+is alphabetical or, if it isn't the first character of a word if it is an 
+apostrophe. If so, it append the character to the current word. If index 
+exceeds LENGTH constant, the program skips over rest of the string and resets index
+for a new word. The program does the same if a word contains a number. Then, once index
+is bigger than 0 and all characters of word have passed the tests for unsupported characters
+program knows that it has found a word. It then puts \0 at the end of it, updates word counter,
+checks for spelling errors and sets index to 0 so that the loop can find the next word.
+
+5.  Why do you think we used fgetc to read each word’s characters one at a time
+rather than use fscanf with a format string like "%s" to read whole words at a time?
+Put another way, what problems might arise by relying on fscanf alone?  
+
+I think that this way sanitazing user input is easier - the programm immediatly
+checks if each character is supported.
+
+
+6.  Why do you think we declared the parameters for check and load as const?
+
+Because these functions aren't supposed to change these parameters.
+They only need to "know" their values.
+
+
+7.  What data structure(s) did you use to implement your spell-checker? 
+Be sure not to leave your answer at just "hash table," "trie," or the like.
+Expound on what’s inside each of your "nodes."
+
+I used trie structure made by a node struct which contained variablie which
+checks if the character is end of a word. The struct also contains an array
+where pointers to next nodes are stored. 
+
+8.  How slow was your code the first time you got it working correctly?
+
+0.16 total time with texts/austinpowers.txt
+
+9.  What kinds of changes, if any, did you make to your code in order to improve its performance?
+
+I deleted lines which could have been done simpler and better, which I 
+replaced with a litle bit more clever soloutions, but that only saved about 0.01 second
+
+10. Do you feel that your code has any bottlenecks that you were not able to chip away at?
+
+The load and unload function are slower than those of staffs implementation
+but after spending a bit of time thinking about what causes it I couldn't find a solution so I think that the whole algorithm for those two functions should be changed to a more clever one, but it was hard enough for me to come up with this one. I really wish I could see staffs implementation source code so I could compare it.
